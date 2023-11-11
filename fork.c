@@ -15,22 +15,23 @@ int my_fork(char **arg)
 	{
 		if (execvp(arg[0], arg) == -1)
 		{ error(arg[0]);
-			return(127);
+			return (127);
 		}
 	}
-	else if (child_ID< 0)
+	else if (child_ID < 0)
 		perror("Error forking process");
 
 	else
 		wpid = waitpid(child_ID, &ID_status, 0);
 
 	if (wpid != -1)
-		if (WIFEXITED(ID_status)) {
+		if (WIFEXITED(ID_status))
+		{
 			int exit_status = WEXITSTATUS(ID_status);
 
 			if (exit_status == 2)
-				return(2);
-			else if (exit_status == 127) 
-				return(127); }
+				return (2);
+			else if (exit_status == 127)
+				return (127); }
 	return (-1);
 }
