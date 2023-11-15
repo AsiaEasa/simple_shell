@@ -6,9 +6,9 @@
  * Return: exit
  */
 int check(char **arg)
-{char *_path;
-	int ex;
-	struct stat stat_in;
+{/*char *_path;*/
+/*	int ex;*/
+/*	struct stat stat_in;*/
 
 	if (arg[0] == NULL)
 	{
@@ -23,17 +23,17 @@ int check(char **arg)
 
 	if (_strncmp(arg[0], "cd", 2) == 0)
 		return (cd(arg));
-	ex = stat(arg[0], &stat_in);
-	if (ex)
-	{ _path = Path(arg[0]);
-		if (!_path)
-		{ error(arg[0]);
-			free(_path);
-			return (127); }
-		arg[0] = NULL;
-		arg[0] = _path;
-		my_fork(arg);
-		free(_path);
-		return (-1); }
+/*	ex = stat(arg[0], &stat_in);*/
+	/*if (ex)*/
+	/*{ _path = Path(arg[0]);*/
+	/*	if (!_path)*/
+		/*{ error(arg[0]);*/
+		/*	free(_path);*/
+			/*return (127); }*/
+		/*arg[0] = NULL;*/
+		/*arg[0] = _path;*/
+		/*my_fork(arg);*/
+		/*free(_path);*/
+		/*return (-1); }*/
 	return (my_fork(arg));
 }

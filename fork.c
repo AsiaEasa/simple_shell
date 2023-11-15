@@ -13,7 +13,8 @@ int my_fork(char **arg)
 	child_ID = fork();
 	if (child_ID ==  0)
 	{
-		if (execve(arg[0], arg, environ) == -1)
+		/*	if (execve(arg[0], arg, environ) == -1)*/
+		if (execvp(arg[0], arg) == -1)
 		{ error(arg[0]);
 			return (127);
 		}
