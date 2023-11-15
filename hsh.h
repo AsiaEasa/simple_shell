@@ -38,4 +38,9 @@ char **str_tok(char *line);
 void interactive(void);
 void none_interactive(void);
 int main(void);
+char *Path(char *command);
+char *_strdup(char *str);
+char *_strchr(char *s, char c);
+char *_strcat(char *dest, char *src);
+char *str_concat(char *word1, char *word2, char *word3);
 #endif

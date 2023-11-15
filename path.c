@@ -36,12 +36,12 @@ char *Path(char *command)
 	free(pathCopy);
 	free(fullPath);
 	return (NULL); }
-	/**
-	 *_strchr - Entry point
-	 * @s: input
-	 * @c: input
-	 * Return: Always 0 (Success)
-	 */
+/**
+ *_strchr - Entry point
+ * @s: input
+ * @c: input
+ * Return: Always 0 (Success)
+ */
 char *_strchr(char *s, char c)
 {
 	int i = 0;
