@@ -1,0 +1,141 @@
+>>> matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+>>> print(matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+[[ 7 10]
+ [15 22]]
+
+>>> print(matrix_mul([[21, 2.32], [5.4, 2.2]], [[4.2, 6.3], [2.3, 7.1]]))
+[[ 93.536 148.772]
+ [ 27.74   49.64 ]]
+
+>>> print(matrix_mul([[2, 2]], [[2, 2], [2, 2]]))
+[[8 8]]
+
+>>> print(matrix_mul([[5.0, 4.0], [2.0, 1.0]], [[2.0, 4], [6, 9]]))
+[[34. 56.]
+ [10. 17.]]
+
+>>> print(matrix_mul([[1, 3]], [[3, 4], [9, 8]]))
+[[30 28]]
+
+>>> try:
+...	print(matrix_mul([[10, 22], [13, 5], [8, 4]], [[6, 1, 2], [5, 2, 2]]))
+... except Exception as te:
+... 	print(te)
+[[170  54  64]
+ [103  23  36]
+ [ 68  16  24]]
+
+>>> try:
+...	print(matrix_mul([[11, "A"]], [[2, 4], [50, 9]]))
+... except Exception as te:
+... 	print(te)
+invalid data type for einsum
+
+>>> try:
+...	print(matrix_mul([["HO", 5]], [[3, 4], [5, 6]]))
+... except Exception as te:
+... 	print(te)
+invalid data type for einsum
+
+>>> try:
+...	print(matrix_mul([], []))
+... except Exception as te:
+... 	print(te)
+0.0
+
+>>> try:
+...	print(matrix_mul([[3, 5, 2]], [8, 5, 2]))
+... except Exception as te:
+...	print(te)
+[53]
+
+>>> try:
+...	print(matrix_mul([[3], [40]], [[2, 4], [8, 6]]))
+... except Exception as te:
+... 	print(te)
+shapes (2,1) and (2,2) not aligned: 1 (dim 1) != 2 (dim 0)
+
+>>> try:
+...	print(matrix_mul([[2, 2], [2, 2]], [[2, 2], ["2", 2]]))
+... except Exception as te:
+... 	print(te)
+invalid data type for einsum
+
+>>> try:
+...	print(matrix_mul(None, None))
+... except Exception as te:
+... 	print(te)
+Object arrays are not currently supported
+
+>>> try:
+...	print(matrix_mul([[3], [40, 2]], [[2, 4], [8, 6]]))
+... except Exception as te:
+... 	print(te)
+setting an array element with a sequence.
+
+>>> try:
+...	print(matrix_mul([[2], [3]], [[20, 9, 4], [10, 8]]))
+... except Exception as te:
+... 	print(te)
+setting an array element with a sequence.
+
+>>> try:
+...	print(matrix_mul([None], []))
+... except Exception as te:
+... 	print(te)
+Object arrays are not currently supported
+
+>>> try:
+...	print(matrix_mul([], [None]))
+... except Exception as te:
+... 	print(te)
+Object arrays are not currently supported
+
+>>> try:
+...	print(matrix_mul([1, 4], None))
+... except Exception as te:
+... 	print(te)
+Object arrays are not currently supported
+
+>>> try:
+...	print(matrix_mul(None, [1, 4]))
+... except Exception as te:
+... 	print(te)
+Object arrays are not currently supported
+
+>>> try:
+...	print(matrix_mul([22, 2, 24], []))
+... except Exception as te:
+... 	print(te)
+shapes (3,) and (0,) not aligned: 3 (dim 0) != 0 (dim 0)
+
+>>> try:
+...	print(matrix_mul())
+... except Exception as te:
+...	print(te)
+lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
+>>> try:
+...	print(matrix_mul([91, 72, 3], [None]))
+... except Exception as te:
+... 	print(te)
+Object arrays are not currently supported
+
+>>> try:
+...	print(matrix_mul([[1, 5], [7, 9]], [[]]))
+... except Exception as te:
+... 	print(te)
+shapes (2,2) and (1,0) not aligned: 2 (dim 1) != 1 (dim 0)
+
+>>> try:
+...	print(matrix_mul([[18, 57, 4]], [None]))
+... except Exception as te:
+... 	print(te)
+Object arrays are not currently supported
+
+>>> try:
+...	print(matrix_mul([[7, 2, 5]], ))
+... except Exception as te:
+...	print(te)
+lazy_matrix_mul() missing 1 required positional argument: 'm_b'
