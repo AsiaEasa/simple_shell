@@ -1,0 +1,116 @@
+Import function from module:
+    >>> MyList = __import__('1-my_list').MyList
+
+    >>> mylist = MyList()
+    >>> type(mylist) == MyList
+    True
+
+    >>> mylist = MyList()
+    >>> isinstance(mylist, list)
+    True
+
+    >>> type(MyList.__dict__['print_sorted'])
+    <class 'function'>
+
+    >>> mylist.__class__.print_sorted()
+    Traceback (most recent call last):
+    TypeError: print_sorted() missing 1 required positional argument: 'self'
+
+    >>> mylist.print_sorted([4, 2, 5])
+    Traceback (most recent call last):
+    TypeError: print_sorted() takes 1 positional argument but 2 were given
+
+    >>> mylist.print_sorted([4, 2, 5], 1)
+    Traceback (most recent call last):
+    TypeError: print_sorted() takes 1 positional argument but 3 were given
+
+    >>> mylist = MyList()
+    >>> mylist.print_sorted()
+    []
+
+    >>> mylist = MyList([20, 1000, 10])
+    >>> mylist.print_sorted()
+    [10, 20, 1000]
+
+    >>> mylist = MyList([1, 4, 2, 3, 5])
+    >>> mylist.print_sorted()
+    [1, 2, 3, 4, 5]
+
+    >>> mylist = MyList([-1000, -98, -232565, 0, -234234, -123])
+    >>> mylist.print_sorted()
+    [-234234, -232565, -1000, -123, -98, 0]
+
+    >>> mylist = MyList([2, 10, 1, -10, 20, 100, 0])
+    >>> mylist.print_sorted()
+    [-10, 0, 1, 2, 10, 20, 100]
+    >>> mylist
+    [2, 10, 1, -10, 20, 100, 0]
+
+    >>> mylist = MyList([-100, 0, 1, 2, 10, 100])
+    >>> mylist.print_sorted()
+    [-100, 0, 1, 2, 10, 100]
+
+    >>> mylist = MyList()
+    >>> mylist.append(100)
+    >>> mylist
+    [100]
+
+-------------------------------------------
+
+
+>>> mylist.append(1)
+>>> mylist.append(4)
+>>> mylist.append(2)
+>>> mylist.append(3)
+>>> mylist.append(5)
+>>> print(mylist)
+[100, 1, 4, 2, 3, 5]
+>>> mylist.print_sorted()
+[1, 2, 3, 4, 5, 100]
+>>> print(mylist)
+[100, 1, 4, 2, 3, 5]
+
+
+>>> mylist.append(50)
+>>> mylist.append(10)
+>>> mylist.append(-1)
+>>> mylist.append(515)
+>>> mylist.append(-5)
+>>> mylist.print_sorted()
+[-5, -1, 1, 2, 3, 4, 5, 10, 50, 100, 515]
+>>>
+
+
+>>> a = [10, 90, 44]
+>>> mylist = MyList(a)
+>>> mylist.print_sorted()
+[10, 44, 90]
+>>>
+
+>>> x = []
+>>> mylist = MyList(x)
+>>> mylist.print_sorted()
+[]
+>>>
+
+>>> mylist2 = MyList()
+>>> mylist2.append(10)
+>>> mylist2.append(10)
+>>> mylist2.append(10)
+>>> mylist2.append(10)
+>>> mylist2.print_sorted()
+[10, 10, 10, 10]
+
+>>> mylist = [10, 20, 30]
+>>> mylist.print_sorted()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'print_sorted'
+>>>
+
+>>> MyList = __import__('1-my_list').MyList
+>>> my_list2.print_sorted()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'my_list2' is not defined
+>>>
