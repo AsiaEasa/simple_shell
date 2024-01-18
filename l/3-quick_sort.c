@@ -29,7 +29,7 @@ size_t lomuto_Par(int *ar, ssize_t begin, ssize_t end, size_t len)
 				ar[i] = p;
 				print_array(ar, len);
 			}
-			i+=1;
+			i += 1;
 		}
 		j++;
 	}
