@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#The script that dislays the content of the current directory
+for l_s in *[!.]*
+do
+    if [ -f "$l_s" ]
+    then
+        echo "${l_s#*-}"
+    fi
+done
