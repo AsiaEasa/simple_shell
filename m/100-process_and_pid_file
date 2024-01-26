@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# The script to do the step in the task Process and PID file
+
+_exit() {
+  rm /var/run/myscript.pid
+  exit
+}
+
+echo "$$" > /var/run/myscript.pid
+
+while true
+do
+  echo "To infinity and beyond"
+  sleep 2
+  trap 'echo "Y U no love me?!" && _exit' SIGQUIT
+  trap 'echo "I hate the kill command" && _exit' SIGTERM
+done
