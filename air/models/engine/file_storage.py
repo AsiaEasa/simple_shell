@@ -8,10 +8,8 @@ import models
 
 
 class FileStorage():
-    """class FileStorage that serializes instance
-	    to a JSON file and deserializes
-	    JSON file to instances
-    """
+    """A class to serializes instances to a JSON file and
+    deserializes JSON file to instances"""
 
     #Private class attributes:
     __file_path = "file.json"
@@ -29,9 +27,7 @@ class FileStorage():
 
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path)"""
-        New = {}
-        #Use the varible New to store the objects inside
-        O = {K: V.to_dict() for K, V in self.__objects.items()}
+        New = {K: V.to_dict() for K, V in self.__objects.items()}
 
         with open(self.__file_path, 'w')as fi_1:
             json.dump(New, fi_1)

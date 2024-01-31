@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """This script is the base"""
 
+
 import uuid
-from datetime import datetime
 import models
+from datetime import datetime
+
 
 class BaseModel:
     """Class BaseModel"""
