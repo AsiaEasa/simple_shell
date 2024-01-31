@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#The script to change home ip address
+grep -qxF '127.0.0.2 localhost' /etc/hosts || echo '127.0.0.2 localhost' >> /etc/hosts
+grep -qxF '8.8.8.8 facebook.com' /etc/hosts || echo '8.8.8.8 facebook.com' >> /etc/hosts
