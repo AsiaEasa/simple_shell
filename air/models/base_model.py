@@ -10,7 +10,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """ Constructor"""
 
-	IOS = "%Y-%m-%dT%H:%M:%S.%f"
+	IOS = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs and kwargs != {}:
             for K, V in kwargs.items():
                 if K == "created_at" or K == "updated_at":
@@ -30,12 +30,12 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values of __dict__ of the instance"""
         dict_C = self.__dict__.copy()
-        dict_C["created_at"] = self.created_at.isoformat()
+	dict_C['__class__'] = type(self).__name__
+	dict_C["created_at"] = self.created_at.isoformat()
         dict_C["updated_at"] = self.updated_at.isoformat()
-        dict_C['__class__'] = self.__class__.__name__
-        return dict_C
+	return dict_C
 
     def __str__(self):
         """print() by use __str__ method"""
-        className = self.__class__.__name__
-        return "[{}] ({}) {}".format(className, self.id, self.__dict__)
+        Name = type(self).__name__
+        return "[{}] ({}) {}".format(Name, self.id, self.__dict__)
