@@ -45,17 +45,18 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         if not args or len(args) < 1:
             print("** class name missing **")
-	else:
-	     if args[0] not in HBNBCommand.classes:
-	         print("** class doesn't exist **")
-	     elif len(args) < 2:
-	         print("** instance id missing **")
-	     else:
-	         instance_key = "{}.{}".format(args[0], args[1])
-	         if instance_key in models.storage.all():
-	       	    print(models.storage.all()[instance_key])
-		else:
-		    print("** no instance found **")
+        else:
+            if args[0] not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+            elif len(args) < 2:
+                print("** instance id missing **")
+            else:
+                instance_key = "{}.{}".format(args[0], args[1])
+                if instance_key in models.storage.all():
+                    print(models.storage.all()[instance_key])
+                else:
+                    print("** no instance found **")
         return
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
