@@ -108,6 +108,40 @@ class HBNBCommand(cmd.Cmd):
                     lists.append(rep_Class)
             print(lists)
 
+    def do_update(self, argument):
+        """Updates an instance based on the class name and id """
+        token1 = shlex.split(argument)
+        if len(token1) == 0:
+            print("** class name missing **")
+            return
+        elif len(token1) == 1:
+            print("** instance id missing **")
+            return
+        elif len(token1) == 2:
+            print("** attribute name missing **")
+            return
+        elif len(token1) == 3:
+            print("** value missing **")
+            return
+        elif token1[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        keyI = token1[0] + "." + token1[1]
+        dicI = models.storage.all()
+        try:
+            instanceU = dicI[keyI]
+        except KeyError:
+            print("** no instance found **")
+            return
+        try:
+            typeA = type(getattr(instanceU, token1[2]))
+            token1[3] = typeA(token1[3])
+        except AttributeError:
+            pass
+        setattr(instanceU, token1[2], token1[3])
+        models.storage.save()
+
+
 if __name__ == '__main__':
     """infinite loop"""
     HBNBCommand().cmdloop()

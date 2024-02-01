@@ -113,14 +113,13 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 obj = models.storage.all()[instance_key]
-		try:
-		    t = type(getattr(obj, args[2]))
-		    args[3] = t(args[3])
-		except AttributeError:
-		    pass
+                try:
+                    t = type(getattr(obj, args[2]))
+                    args[3] = t(args[3])
+                except AttributeError:
+                    pass
                 setattr(obj, args[2], args[3])
                 models.storage.save()
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
