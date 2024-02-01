@@ -58,5 +58,25 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
         return
 
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class name and id"""
+        args = shlex.split(arg)
+        if not args or len(args) < 1:
+            print("** class name missing **")
+	    return
+        else:
+            if args[0] not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+	        return
+            elif len(args) < 2:
+                print("** instance id missing **")
+	        return
+            else:
+                instance_key = "{}.{}".format(args[0], args[1])
+                if instance_key in models.storage.all():
+                    del models.storage.all()[instance_key]
+                else:
+                    print("** no instance found **")
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
