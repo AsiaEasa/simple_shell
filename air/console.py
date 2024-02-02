@@ -147,27 +147,23 @@ class HBNBCommand(cmd.Cmd):
         if not sys.stdin.isatty():
             print()
 
+        args = arg.split(".")
+        class_name = args[0]
         # Check if the line matches the pattern "<class name>.all()"
         X = re.search(r"^(\w*)\.all\(\)$", arg)
         if X:
-            args = arg.split(".")
-            class_name = args[0]
             self.do_all(class_name) 
             return ''
 
         # Check if the line matches the pattern "<class name>.count()"
         X = re.search(r"^(\w*)\.count\(\)$", arg)
         if X:
-            args = arg.split(".")
-            class_name = args[0]
             self.do_count(class_name) 
             return ''
 
         # Check if the line matches the pattern "<class name>.show(<id>)"
-        X = re.search(r"^(\w*)\.show\((\w*)\)$", arg)
+        X = re.search(r"^(\w*)\.show\(([\w-]+)\)$", arg)
         if X:
-            args = arg.split(".")
-            class_name = args[0]
             ID = args[1][5:-1]
             Input = f"{class_name} {ID}"
             self.do_show(Input)
