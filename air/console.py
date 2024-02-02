@@ -3,6 +3,7 @@
 Module Console interpreter
 """
 
+import re
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -13,7 +14,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models.city import City
-
+import sys
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class."""
@@ -89,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
 
     def do_all(self, arg):
-        """Prints string representation of all instances.
+        """Prints string representation of all instances or instances of a specific class.
         """
         args = shlex.split(arg)
         if not args:
@@ -129,6 +130,30 @@ class HBNBCommand(cmd.Cmd):
                     pass
                 setattr(obj, args[2], args[3])
                 models.storage.save()
+
+    def precmd(self, arg):
+        """the precmd method of the parent class."""
+        # Make the app work non-interactively if not in a tty
+        if not sys.stdin.isatty():
+            print()
+
+        # Check if the line matches the pattern "<class name>.all()"
+        X = re.search(r"^(\w*)\.all\(\)$", arg)
+        if X:
+            args = arg.split(".")
+            class_name = args[0]
+
+            if class_name not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+                return ''
+
+            all_instances = [str(V) for K, V in models.storage.all().items()
+                             if type(V).__name__ == class_name]
+            print(all_instances)
+            return ''
+
+        return cmd.Cmd.precmd(self, arg)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
