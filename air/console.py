@@ -131,6 +131,16 @@ class HBNBCommand(cmd.Cmd):
                 setattr(obj, args[2], args[3])
                 models.storage.save()
 
+    def do_count(self, arg):
+        """retrieve the number of instances of a class."""
+
+        C = 0
+        for K in models.storage.all().keys():
+            class_name, instance_id = K.split(".")
+            if arg == class_name:
+                C += 1
+        print(C)
+
     def precmd(self, arg):
         """the precmd method of the parent class."""
         # Make the app work non-interactively if not in a tty
@@ -143,7 +153,24 @@ class HBNBCommand(cmd.Cmd):
             args = arg.split(".")
             class_name = args[0]
             self.do_all(class_name) 
+            return ''
 
+        # Check if the line matches the pattern "<class name>.count()"
+        X = re.search(r"^(\w*)\.count\(\)$", arg)
+        if X:
+            args = arg.split(".")
+            class_name = args[0]
+            self.do_count(class_name) 
+            return ''
+
+        # Check if the line matches the pattern "<class name>.show(<id>)"
+        X = re.search(r"^(\w*)\.show\((\w*)\)$", arg)
+        if X:
+            args = arg.split(".")
+            class_name = args[0]
+            ID = args[1][5:-1]
+            Input = f"{class_name} {ID}"
+            self.do_show(Input)
             return ''
 
         return cmd.Cmd.precmd(self, arg)
