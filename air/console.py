@@ -142,14 +142,8 @@ class HBNBCommand(cmd.Cmd):
         if X:
             args = arg.split(".")
             class_name = args[0]
+            self.do_all(class_name) 
 
-            if class_name not in HBNBCommand.classes:
-                print("** class doesn't exist **")
-                return ''
-
-            all_instances = [str(V) for K, V in models.storage.all().items()
-                             if type(V).__name__ == class_name]
-            print(all_instances)
             return ''
 
         return cmd.Cmd.precmd(self, arg)
