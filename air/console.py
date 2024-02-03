@@ -17,28 +17,35 @@ from models.city import City
 import sys
 
 class HBNBCommand(cmd.Cmd):
-    """Command interpreter class."""
+    """ Command interpreter class.
+    """
 
+    #The attribute to this calss
     prompt = "(hbnb) "
     classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
                'City': City, 'Amenity': Amenity,
                'Place': Place, 'Review': Review}
 
+
     def do_quit(self, arg):
-        """Quit command to exit the program."""
+        """ Quit command to exit the program.
+        """
         return True
 
     def do_EOF(self, arg):
-        """Exit the program on EOF."""
+        """ Exit the program on EOF.
+        """
         print()
         return True
 
     def emptyline(self):
-        """Do nothing on empty line."""
+        """ Do nothing on empty line.
+        """
         pass
 
     def do_create(self, arg):
-        """Create a new instance of classes, save it, and print the id."""
+        """ Create a new instance of classes, save it, and print the id.
+        """
         if not arg:
             print("** class name missing **")
         else:
@@ -51,7 +58,8 @@ class HBNBCommand(cmd.Cmd):
                 print(New_instance.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance."""
+        """ Prints the string representation of an instance.
+        """
         args = shlex.split(arg)
         if not args or len(args) < 1:
             print("** class name missing **")
@@ -69,7 +77,8 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id"""
+        """ Deletes an instance based on the class name and id
+        """
         args = shlex.split(arg)
         if not args or len(args) < 1:
             print("** class name missing **")
@@ -90,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
 
     def do_all(self, arg):
-        """Prints string representation of all instances or instances of a specific class.
+        """ Prints string representation of all instances or instances of a specific class.
         """
         args = shlex.split(arg)
         if not args:
@@ -104,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
             print(al_instances)
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id.
+        """ Updates an instance based on the class name and id.
         """
         args = shlex.split(arg)
         if not args:
@@ -132,8 +141,8 @@ class HBNBCommand(cmd.Cmd):
                 models.storage.save()
 
     def do_count(self, arg):
-        """retrieve the number of instances of a class."""
-
+        """ retrieve the number of instances of a class.
+        """
         C = 0
         for K in models.storage.all().keys():
             class_name, instance_id = K.split(".")
@@ -142,8 +151,9 @@ class HBNBCommand(cmd.Cmd):
         print(C)
 
     def precmd(self, arg):
-        """the precmd method of the parent class."""
-        # Make the app work non-interactively if not in a tty
+        """ the precmd method of the parent class.
+        """
+        # Make the app work non-interactively
         if not sys.stdin.isatty():
             print()
 
@@ -161,8 +171,8 @@ class HBNBCommand(cmd.Cmd):
             self.do_count(class_name) 
             return ''
 
-        # Check if the line matches the pattern "<class name>.show(<id>)"
-        X = re.search(r"^(\w*)\.show\(([\w-]+)\)$", arg)
+        # Check if the line matches the pattern "<class name>.show("<id>")"
+        X = re.search(r"^(\w*)\.show\(['\"]?([\w-]+)['\"]?\)$", arg)
         if X:
             ID = args[1][5:-1]
             Input = f"{class_name} {ID}"
