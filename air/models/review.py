@@ -3,14 +3,14 @@
 
 """
 
-from models._im import * 
+from models._im import *
 
 
 class Review(BaseModel):
-    """ Class of REVIEWS 
+    """ Class of REVIEWS
     """
 
-    #The attribute to this calss
+    "The attribute to this calss"
     place_id = ""
     user_id = ""
     text = ""

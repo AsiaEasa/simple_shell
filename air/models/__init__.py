@@ -3,7 +3,7 @@
 
 """
 
-from models._im import * 
+from models._im import *
 
 storage = FileStorage()
 storage.reload()

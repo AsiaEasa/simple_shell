@@ -2,12 +2,12 @@
 """ This is the state MODELS
 """
 
-from models._im import * 
+from models._im import *
 
 
 class State(BaseModel):
     """ Class STATE
     """
 
-    #The attribute to this calss
+    "The attribute to this calss"
     name = ""

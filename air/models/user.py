@@ -1,16 +1,16 @@
 #!/usr/bin/python3
-""" MODELS to USER 
+""" MODELS to USER
 
 """
 
-from models._im import * 
+from models._im import *
 
 
 class User(BaseModel):
     """ The USER that will inhereit from the base
     """
 
-    #The attribute to this calss
+    "The attribute to this calss"
     email = ""
     password = ""
     first_name = ""

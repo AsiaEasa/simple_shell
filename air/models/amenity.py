@@ -3,12 +3,12 @@
 
 """
 
-from models._im import * 
+from models._im import *
 
 
 class Amenity(BaseModel):
     """ Class AMENITY
     """
 
-    #The attribute to this calss
+    "The attribute to this calss"
     name = ""
