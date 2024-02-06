@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-"""
-Module Console interpreter
+""" Module to Console
+
 """
 
 from imports import * 
+
 
 class HBNBCommand(cmd.Cmd):
     """ Command interpreter class.
@@ -19,22 +20,29 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """ Quit command to exit the program.
         """
+
         return True
 
+
     def do_EOF(self, arg):
-        """ Exit the program on EOF.
+        """ EOF command to exit the program.
         """
+
         print()
         return True
+
 
     def emptyline(self):
         """ Do nothing on empty line.
         """
+
         pass
+
 
     def do_create(self, arg):
         """ Create a new instance of classes, save it, and print the id.
         """
+
         if not arg:
             print("** class name missing **")
         else:
@@ -49,6 +57,8 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """ Prints the string representation of an instance.
         """
+
+        #spilt the argment
         args = shlex.split(arg)
         if not args or len(args) < 1:
             print("** class name missing **")
@@ -65,9 +75,12 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
         return
 
+
     def do_destroy(self, arg):
-        """ Deletes an instance based on the class name and id
+        """ Deletes an instance based on the class name and id.
         """
+
+        #spilt the argmemt
         args = shlex.split(arg)
         if not args or len(args) < 1:
             print("** class name missing **")
@@ -87,9 +100,12 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** no instance found **")
 
+
     def do_all(self, arg):
         """ Prints string representation of all instances or instances of a specific class.
         """
+
+        #spilt the argment
         args = shlex.split(arg)
         if not args:
             ALL_inst = [str(V) for V in models.storage.all().values()]
@@ -101,9 +117,12 @@ class HBNBCommand(cmd.Cmd):
                          if type(V).__name__ == args[0]]
             print(ALL_ins)
 
+
     def do_update(self, arg):
         """ Updates an instance based on the class name and id.
         """
+
+        #split the argment
         args = shlex.split(arg)
         if not args:
             print("** class name missing **")
@@ -129,9 +148,12 @@ class HBNBCommand(cmd.Cmd):
                 setattr(OB, args[2], args[3])
                 models.storage.save()
 
+
     def do_count(self, arg):
         """ retrieve the number of instances of a class.
         """
+
+        #varible to use in count
         C = 0
         for K in models.storage.all().keys():
             class_name, instance_id = K.split(".")
@@ -142,6 +164,7 @@ class HBNBCommand(cmd.Cmd):
     def precmd(self, arg):
         """ the precmd method of the parent class.
         """
+
         # Make the app work non-interactively
         if not sys.stdin.isatty():
             print()
