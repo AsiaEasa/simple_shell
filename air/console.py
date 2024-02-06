@@ -3,18 +3,7 @@
 Module Console interpreter
 """
 
-import re
-import cmd
-from models.base_model import BaseModel
-from models.user import User
-import models
-import shlex
-from models.state import State
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from models.city import City
-import sys
+from imports import * 
 
 class HBNBCommand(cmd.Cmd):
     """ Command interpreter class.
@@ -22,7 +11,7 @@ class HBNBCommand(cmd.Cmd):
 
     #The attribute to this calss
     prompt = "(hbnb) "
-    classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
+    KH = {'BaseModel': BaseModel, 'User': User, 'State': State,
                'City': City, 'Amenity': Amenity,
                'Place': Place, 'Review': Review}
 
@@ -49,13 +38,13 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
         else:
-            if arg not in HBNBCommand.classes:
+            if arg not in HBNBCommand.KH:
                 print("** class doesn't exist **")
             else:
-                _class = self.classes.get(arg)
-                New_instance = _class()
+                _CLASS = self.KH.get(arg)
+                New_in = _CLASS()
                 models.storage.save()
-                print(New_instance.id)
+                print(New_in.id)
 
     def do_show(self, arg):
         """ Prints the string representation of an instance.
@@ -64,14 +53,14 @@ class HBNBCommand(cmd.Cmd):
         if not args or len(args) < 1:
             print("** class name missing **")
         else:
-            if args[0] not in HBNBCommand.classes:
+            if args[0] not in HBNBCommand.KH:
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
-                instance_key = "{}.{}".format(args[0], args[1])
-                if instance_key in models.storage.all():
-                    print(models.storage.all()[instance_key])
+                inst_key = "{}.{}".format(args[0], args[1])
+                if inst_key in models.storage.all():
+                    print(models.storage.all()[inst_key])
                 else:
                     print("** no instance found **")
         return
@@ -84,16 +73,16 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         else:
-            if args[0] not in HBNBCommand.classes:
+            if args[0] not in HBNBCommand.KH:
                 print("** class doesn't exist **")
                 return
             elif len(args) < 2:
                 print("** instance id missing **")
                 return
             else:
-                instance_key = "{}.{}".format(args[0], args[1])
-                if instance_key in models.storage.all():
-                    del models.storage.all()[instance_key]
+                inst_key = "{}.{}".format(args[0], args[1])
+                if inst_key in models.storage.all():
+                    del models.storage.all()[inst_key]
                     models.storage.save()
                 else:
                     print("** no instance found **")
@@ -103,14 +92,14 @@ class HBNBCommand(cmd.Cmd):
         """
         args = shlex.split(arg)
         if not args:
-            all_instances = [str(V) for V in models.storage.all().values()]
-            print(all_instances)
-        elif args[0] not in HBNBCommand.classes:
+            ALL_inst = [str(V) for V in models.storage.all().values()]
+            print(ALL_inst)
+        elif args[0] not in HBNBCommand.KH:
             print("** class doesn't exist **")
         else:
-            al_instances = [str(V) for K, V in models.storage.all().items()
+            ALL_ins = [str(V) for K, V in models.storage.all().items()
                          if type(V).__name__ == args[0]]
-            print(al_instances)
+            print(ALL_ins)
 
     def do_update(self, arg):
         """ Updates an instance based on the class name and id.
@@ -118,26 +107,26 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         if not args:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.classes:
+        elif args[0] not in HBNBCommand.KH:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
         else:
-            instance_key = "{}.{}".format(args[0], args[1])
-            if instance_key not in models.storage.all():
+            ins_K = "{}.{}".format(args[0], args[1])
+            if ins_K not in models.storage.all():
                 print("** no instance found **")
             elif len(args) < 3:
                 print("** attribute name missing **")
             elif len(args) < 4:
                 print("** value missing **")
             else:
-                obj = models.storage.all()[instance_key]
+                OB = models.storage.all()[ins_K]
                 try:
-                    t = type(getattr(obj, args[2]))
+                    t = type(getattr(OB, args[2]))
                     args[3] = t(args[3])
                 except AttributeError:
                     pass
-                setattr(obj, args[2], args[3])
+                setattr(OB, args[2], args[3])
                 models.storage.save()
 
     def do_count(self, arg):
@@ -158,24 +147,24 @@ class HBNBCommand(cmd.Cmd):
             print()
 
         args = arg.split(".")
-        class_name = args[0]
+        C_name = args[0]
         # Check if the line matches the pattern "<class name>.all()"
         X = re.search(r"^(\w*)\.all\(\)$", arg)
         if X:
-            self.do_all(class_name) 
+            self.do_all(C_name) 
             return ''
 
         # Check if the line matches the pattern "<class name>.count()"
         X = re.search(r"^(\w*)\.count\(\)$", arg)
         if X:
-            self.do_count(class_name) 
+            self.do_count(C_name) 
             return ''
 
         # Check if the line matches the pattern "<class name>.show("<id>")"
         X = re.search(r"^(\w*)\.show\(['\"]?([\w-]+)['\"]?\)$", arg)
         if X:
             ID = args[1][5:-1]
-            Input = f"{class_name} {ID}"
+            Input = f"{C_name} {ID}"
             self.do_show(Input)
             return ''
 
