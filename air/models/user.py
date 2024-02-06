@@ -1,16 +1,17 @@
 #!/usr/bin/python3
-"""Models of a user"""
+""" MODELS to USER 
 
-from models.base_model import BaseModel
+"""
+
+from models._im import * 
 
 
 class User(BaseModel):
-    """The user that will inhereit from the base class"""
+    """The USER that will inhereit from the base
+    """
+
+    #The attribute to this calss
     email = ""
     password = ""
     first_name = ""
     last_name = ""
-
-    def __init__(self, *args, **kwargs):
-        """Constructor"""
-        super().__init__(*args, **kwargs)

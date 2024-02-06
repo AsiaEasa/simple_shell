@@ -1,11 +1,16 @@
 #!/usr/bin/python3
-"""This is the class for reviews"""
+"""MODELS to Review
 
-from models.base_model import BaseModel
+"""
+
+from models._im import * 
 
 
 class Review(BaseModel):
-    """The base class of reviews"""
+    """Class of REVIEWS 
+    """
+
+    #The attribute to this calss
     place_id = ""
     user_id = ""
     text = ""

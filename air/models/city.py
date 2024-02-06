@@ -1,10 +1,15 @@
 #!/usr/bin/python3
-"""The models of city"""
+""" MODELS of CITY
 
-from models.base_model import BaseModel
+"""
+
+from models._im import * 
 
 
 class City(BaseModel):
-    """Class that every city will inhirit from"""
+    """ Class CITY to all city
+    """
+
+    #The attribute to this calss
     state_id = ""
     name = ""

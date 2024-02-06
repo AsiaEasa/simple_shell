@@ -1,9 +1,13 @@
 #!/usr/bin/python3
-"""This is the state model"""
+"""This is the state MODELS
+"""
 
-from models.base_model import BaseModel
+from models._im import * 
 
 
 class State(BaseModel):
-    """Class state"""
+    """ Class STATE
+    """
+
+    #The attribute to this calss
     name = ""

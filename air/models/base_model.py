@@ -1,14 +1,15 @@
 #!/usr/bin/python3
-"""This script is the base"""
+"""This script is the base
+
+"""
 
 
-import uuid
-import models
-from datetime import datetime
+from models.im import * 
 
 
 class BaseModel:
-    """Class BaseModel"""
+    """Class BaseModel
+    """
     def __init__(self, *args, **kwargs):
         """Constructor"""
         IOS = "%Y-%m-%dT%H:%M:%S.%f"

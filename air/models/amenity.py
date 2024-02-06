@@ -1,9 +1,14 @@
 #!/usr/bin/python3
-"""This model Amenity"""
+""" This MODELS to Amenity
 
-from models.base_model import BaseModel
+"""
+
+from models._im import * 
 
 
 class Amenity(BaseModel):
-    """Class Amenity"""
+    """ Class AMENITY
+    """
+
+    #The attribute to this calss
     name = ""
