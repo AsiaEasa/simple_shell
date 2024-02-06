@@ -11,7 +11,9 @@ class BaseModel:
     """Class BaseModel
     """
     def __init__(self, *args, **kwargs):
-        """Constructor"""
+        """CON
+        """
+
         IOS = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs and kwargs != {}:
             for K, V in kwargs.items():
@@ -28,12 +30,16 @@ class BaseModel:
             models.storage.new(self)
 
     def save(self):
-        """updates the public instance attribute updated_at with the current datetime"""
+        """ UPDATE the public instance attribute updated_at with the current datetime
+        """
+
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """Returns a dictionary containing all keys/values of __dict__ of the instance"""
+        """Returns a dictionary containing all K/V
+        """
+
         dict_C = self.__dict__.copy()
         dict_C["created_at"] = self.created_at.isoformat()
         dict_C["updated_at"] = self.updated_at.isoformat()
@@ -41,6 +47,7 @@ class BaseModel:
         return dict_C
 
     def __str__(self):
-        """print() by use __str__ method"""
-        Name = type(self).__name__
-        return "[{}] ({}) {}".format(Name, self.id, self.__dict__)
+        """ To handle print()
+        """
+
+        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"

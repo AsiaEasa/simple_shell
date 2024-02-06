@@ -10,6 +10,7 @@ from models._im import *
 class Place(BaseModel):
     """ The class Place to handel placese
     """
+
     #The attribute to this calss
     city_id = ""
     user_id = ""

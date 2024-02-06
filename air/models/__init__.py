@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""To storage the instances"""
+"""To storage the instances
 
-from models.engine.file_storage import FileStorage
+"""
 
-classes = {'BaseModel': 'BaseModel', 'User': 'User'}
+from models._im import * 
+
 storage = FileStorage()
 storage.reload()

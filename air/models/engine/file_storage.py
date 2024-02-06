@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Module for FileStorage class"""
+"""MODELS for STORE
+
+"""
 
 
 import json
@@ -14,8 +16,9 @@ from models.city import City
 
 
 class FileStorage():
-    """A class to serializes instances to a JSON file and
-    deserializes JSON file to instances"""
+    """A class FILESTORAGE to serializes instances to a JSON file and
+    deserializes JSON file to instances
+    """
 
     #Private class attributes:
     __file_path = "file.json"
