@@ -17,26 +17,21 @@ class HBNBCommand(cmd.Cmd):
                'Place': Place, 'Review': Review}
 
 
-    def do_quit(self, arg):
-        """ Quit command to exit the program.
+    def do_all(self, arg):
+        """ Prints string representation of all instances or instances of a specific class.
         """
 
-        return True
-
-
-    def do_EOF(self, arg):
-        """ EOF command to exit the program.
-        """
-
-        print()
-        return True
-
-
-    def emptyline(self):
-        """ Do nothing on empty line.
-        """
-
-        pass
+        #spilt the argment
+        args = shlex.split(arg)
+        if not args:
+            ALL_inst = [str(V) for V in models.storage.all().values()]
+            print(ALL_inst)
+        elif args[0] not in HBNBCommand.KH:
+            print("** class doesn't exist **")
+        else:
+            ALL_ins = [str(V) for K, V in models.storage.all().items()
+                         if type(V).__name__ == args[0]]
+            print(ALL_ins)
 
 
     def do_create(self, arg):
@@ -54,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
                 models.storage.save()
                 print(New_in.id)
 
+
     def do_show(self, arg):
         """ Prints the string representation of an instance.
         """
@@ -68,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
-                inst_key = "{}.{}".format(args[0], args[1])
+                inst_key = f"{args[0]}.{args[1]}"
                 if inst_key in models.storage.all():
                     print(models.storage.all()[inst_key])
                 else:
@@ -93,29 +89,12 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
                 return
             else:
-                inst_key = "{}.{}".format(args[0], args[1])
+                inst_key = f"{args[0]}.{args[1]}"
                 if inst_key in models.storage.all():
                     del models.storage.all()[inst_key]
                     models.storage.save()
                 else:
                     print("** no instance found **")
-
-
-    def do_all(self, arg):
-        """ Prints string representation of all instances or instances of a specific class.
-        """
-
-        #spilt the argment
-        args = shlex.split(arg)
-        if not args:
-            ALL_inst = [str(V) for V in models.storage.all().values()]
-            print(ALL_inst)
-        elif args[0] not in HBNBCommand.KH:
-            print("** class doesn't exist **")
-        else:
-            ALL_ins = [str(V) for K, V in models.storage.all().items()
-                         if type(V).__name__ == args[0]]
-            print(ALL_ins)
 
 
     def do_update(self, arg):
@@ -131,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 2:
             print("** instance id missing **")
         else:
-            ins_K = "{}.{}".format(args[0], args[1])
+            ins_K = f"{args[0]}.{args[1]}"
             if ins_K not in models.storage.all():
                 print("** no instance found **")
             elif len(args) < 3:
@@ -192,6 +171,28 @@ class HBNBCommand(cmd.Cmd):
             return ''
 
         return cmd.Cmd.precmd(self, arg)
+
+
+    def do_quit(self, arg):
+        """ Quit command to exit the program.
+        """
+
+        return True
+
+
+    def do_EOF(self, arg):
+        """ EOF command to exit the program.
+        """
+
+        print()
+        return True
+
+
+    def emptyline(self):
+        """ Do nothing on empty line.
+        """
+
+        pass
 
 
 if __name__ == '__main__':
