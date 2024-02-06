@@ -4,19 +4,12 @@
 """
 
 
-import json
-from models.base_model import BaseModel
-import models
-from models.user import User
-from models.state import State
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from models.city import City
+from models.engine.im import *
+
 
 
 class FileStorage():
-    """A class FILESTORAGE to serializes instances to a JSON file and
+    """ A class FILESTORAGE to serializes instances to a JSON file and
     deserializes JSON file to instances
     """
 
@@ -24,32 +17,43 @@ class FileStorage():
     __file_path = "file.json"
     __objects = {}
 
+
     def all(self):
-        """returns the dictionary __objects"""
+        """ returns the dictionary
+        """
+
         return self.__objects
 
     def new(self, obj):
-        """ sets in __objects the obj with key <obj class name>.id"""
+        """ sets in __objects the obj with key <obj class name>.id
+        """
+
+        #To get the OBJ
         K = obj.__class__.__name__
         ID = obj.id
-        self.__objects["{}.{}".format(K, ID)] = obj
+        FileStorage.__objects[f"{K}.{ID}"] = obj
 
     def save(self):
-        """ serializes __objects to the JSON file (path: __file_path)"""
-        New = {K: V.to_dict() for K, V in self.__objects.items()}
+        """ serializes __objects to the JSON file
+        """
 
-        with open(self.__file_path, 'w')as fi_1:
+        #varible to get the dict
+        New = {K: V.to_dict() for K, V in FileStorage.__objects.items()}
+
+        with open(FileStorage.__file_path, 'w')as fi_1:
             json.dump(New, fi_1)
 
     def reload(self):
-        """ deserializes the JSON file to __objects (only if the JSON file
-        (__file_path) exists ; otherwise, do nothing. If the file doesn’t
-        exist, no exception should be raised)"""
+        """ deserializes the JSON file to __objects 
+        """
+
         try:
-            with open(self.__file_path, 'r', encoding="UTF8") as fi_2:
+            with open(FileStorage.__file_path, 'r', encoding="UTF8") as fi_2:
                 LOAD = json.load(fi_2)
-                for K, V in LOAD.items():
+                for K in LOAD.keys():
+                    #give the value of key in dict
+                    V = LOAD[K]
                     classname = eval(V["__class__"])(**V)
-                    self.__objects[K] = classname
+                    FileStorage.__objects[K] = classname
         except FileNotFoundError:
             pass
