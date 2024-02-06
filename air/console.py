@@ -17,6 +17,39 @@ class HBNBCommand(cmd.Cmd):
                'Place': Place, 'Review': Review}
 
 
+    def precmd(self, arg):
+        """ the precmd method of the parent class.
+        """
+
+        # Make the app work non-interactively
+        if not sys.stdin.isatty():
+            print()
+
+        args = arg.split(".")
+        C_name = args[0]
+        # Check if the line matches the pattern "<class name>.all()"
+        X = re.search(r"^(\w*)\.all\(\)$", arg)
+        if X:
+            self.do_all(C_name) 
+            return ''
+
+        # Check if the line matches the pattern "<class name>.count()"
+        X = re.search(r"^(\w*)\.count\(\)$", arg)
+        if X:
+            self.do_count(C_name) 
+            return ''
+
+        # Check if the line matches the pattern "<class name>.show("<id>")"
+        X = re.search(r"^(\w*)\.show\(['\"]?([\w-]+)['\"]?\)$", arg)
+        if X:
+            ID = args[1][5:-1]
+            Input = f"{C_name} {ID}"
+            self.do_show(Input)
+            return ''
+
+        return cmd.Cmd.precmd(self, arg)
+
+
     def do_all(self, arg):
         """ Prints string representation of all instances or instances of a specific class.
         """
@@ -139,38 +172,6 @@ class HBNBCommand(cmd.Cmd):
             if arg == class_name:
                 C += 1
         print(C)
-
-    def precmd(self, arg):
-        """ the precmd method of the parent class.
-        """
-
-        # Make the app work non-interactively
-        if not sys.stdin.isatty():
-            print()
-
-        args = arg.split(".")
-        C_name = args[0]
-        # Check if the line matches the pattern "<class name>.all()"
-        X = re.search(r"^(\w*)\.all\(\)$", arg)
-        if X:
-            self.do_all(C_name) 
-            return ''
-
-        # Check if the line matches the pattern "<class name>.count()"
-        X = re.search(r"^(\w*)\.count\(\)$", arg)
-        if X:
-            self.do_count(C_name) 
-            return ''
-
-        # Check if the line matches the pattern "<class name>.show("<id>")"
-        X = re.search(r"^(\w*)\.show\(['\"]?([\w-]+)['\"]?\)$", arg)
-        if X:
-            ID = args[1][5:-1]
-            Input = f"{C_name} {ID}"
-            self.do_show(Input)
-            return ''
-
-        return cmd.Cmd.precmd(self, arg)
 
 
     def do_quit(self, arg):
