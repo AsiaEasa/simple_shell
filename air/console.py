@@ -166,13 +166,20 @@ class HBNBCommand(cmd.Cmd):
         """ retrieve the number of instances of a class.
         """
 
-        #varible to use in count
-        C = 0
-        for K in models.storage.all().keys():
-            class_name, instance_id = K.split(".")
-            if arg == class_name:
-                C += 1
-        print(C)
+        #split the argment
+        args = shlex.split(arg)
+        if not args:
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.KH_K:
+            print("** class doesn't exist **")
+        else:
+            #variable to use in count
+            C = 0
+            for K in models.storage.all().keys():
+                class_name, instance_id = K.split(".")
+                if args[0] == class_name:
+                    C += 1
+            print(C)
 
 
     def do_quit(self, arg):
