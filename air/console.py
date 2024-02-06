@@ -15,6 +15,7 @@ class HBNBCommand(cmd.Cmd):
     KH = {'BaseModel': BaseModel, 'User': User, 'State': State,
                'City': City, 'Amenity': Amenity,
                'Place': Place, 'Review': Review}
+    KH_K = list(KH.keys())
 
 
     def precmd(self, arg):
@@ -59,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             ALL_inst = [str(V) for V in models.storage.all().values()]
             print(ALL_inst)
-        elif args[0] not in HBNBCommand.KH:
+        elif args[0] not in HBNBCommand.KH_K:
             print("** class doesn't exist **")
         else:
             ALL_ins = [str(V) for K, V in models.storage.all().items()
@@ -74,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
         else:
-            if arg not in HBNBCommand.KH:
+            if arg not in HBNBCommand.KH_K:
                 print("** class doesn't exist **")
             else:
                 _CLASS = self.KH.get(arg)
@@ -92,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
         if not args or len(args) < 1:
             print("** class name missing **")
         else:
-            if args[0] not in HBNBCommand.KH:
+            if args[0] not in HBNBCommand.KH_K:
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -115,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         else:
-            if args[0] not in HBNBCommand.KH:
+            if args[0] not in HBNBCommand.KH_K:
                 print("** class doesn't exist **")
                 return
             elif len(args) < 2:
@@ -138,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         if not args:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.KH:
+        elif args[0] not in HBNBCommand.KH_K:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
