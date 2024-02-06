@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This is the state MODELS
+""" This is the state MODELS
 """
 
 from models._im import * 

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""MODELS to Review
+""" MODELS to Review
 
 """
 
@@ -7,7 +7,7 @@ from models._im import *
 
 
 class Review(BaseModel):
-    """Class of REVIEWS 
+    """ Class of REVIEWS 
     """
 
     #The attribute to this calss

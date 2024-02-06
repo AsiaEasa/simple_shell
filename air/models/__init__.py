@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""To storage the instances
+""" To storage the instances
 
 """
 
