@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This script is the base
+""" This script is the base
 
 """
 
@@ -8,10 +8,10 @@ from models.im import *
 
 
 class BaseModel:
-    """Class BaseModel
+    """ Class BaseModel
     """
     def __init__(self, *args, **kwargs):
-        """CON
+        """ CON
         """
 
         IOS = "%Y-%m-%dT%H:%M:%S.%f"
@@ -30,19 +30,21 @@ class BaseModel:
             models.storage.new(self)
 
     def save(self):
-        """ UPDATE the public instance attribute updated_at with the current datetime
+        """ UPDATE the public instance attribute updated_at
         """
 
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """Returns a dictionary containing all K/V
+        """ Returns a dictionary containing all K/V
         """
 
         dict_C = self.__dict__.copy()
-        dict_C["created_at"] = self.created_at.isoformat()
-        dict_C["updated_at"] = self.updated_at.isoformat()
+        K = ["created_at", "updated_at"]
+        for KEY, V in self.__dict__.items():
+            if KEY in K:
+                dict_C[KEY] = V.isoformat()
         dict_C['__class__'] = self.__class__.__name__
         return dict_C
 
