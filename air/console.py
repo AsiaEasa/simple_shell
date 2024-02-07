@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
 
         " Check if the line matches the pattern of update in 15 and 16"
         X = re.search(r"^(\w*)\.update\(['\"]?([\w-]+)['\"]?, ['\"]?([\w-]+)['\"]?, (.*?)\)$", arg)
-        Y = re.search(r"^(\w*)\.update\(['\"]?([\w-]+)['\"]?, (\{.*\})\)$", arg)
+        Y = re.search(r"^(\w+)\.update\(['\"]?([\w-]+)['\"]?, ({.*})\)$", arg)
 
         if X:
             PR = args[1][7:-1]
@@ -74,11 +74,12 @@ class HBNBCommand(cmd.Cmd):
 
         if Y:
             PR = args[1][7:-1]
-            AR = PR.split(", {")
+            AR = PR.split(", ", 1)
             ID = AR[0]
+            print(AR)
             if len(AR) == 2:
-                S = "{" + AR[1]
-                SS = json.loads(S)
+                SS = json.loads(AR[1])
+                print(SS)
                 for X in SS:
                     V = SS[K]
                     Input = f"{C_name} {ID} {K} {V}"
