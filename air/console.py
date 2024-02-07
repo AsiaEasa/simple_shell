@@ -84,7 +84,8 @@ class HBNBCommand(cmd.Cmd):
             PR = args[1][7:-1]
             AR = PR.split(", ", 1)
             ID = AR[0]
-            SS = json.loads(AR[1])
+            QU = AR[1].replace("'", '"')
+            SS = json.loads(QU)
             for K in SS:
                 V = SS[K]
                 Input = f"{C_name} {ID} {K} {V}"
