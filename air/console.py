@@ -34,28 +34,28 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(".")
         C_name = args[0]
         " Check if the line matches the pattern <class name>.all()"
-        X = re.search(r"^(\w*)\.all\(\)$", arg)
-        if X:
+        A = re.search(r"^(\w*)\.all\(\)$", arg)
+        if A:
             self.do_all(C_name)
             return ""
 
         " Check if the line matches the pattern <class name>.count()"
-        X = re.search(r"^(\w*)\.count\(\)$", arg)
-        if X:
+        B = re.search(r"^(\w*)\.count\(\)$", arg)
+        if B:
             self.do_count(C_name)
             return ""
 
         " Check if the line matches the pattern <class name>.show(<id>)"
-        X = re.search(r"^(\w*)\.show\(['\"]?([\w-]+)['\"]?\)$", arg)
-        if X:
+        C = re.search(r"^(\w*)\.show\(['\"]?([\w-]+)['\"]?\)$", arg)
+        if C:
             ID = args[1][5:-1]
             Input = f"{C_name} {ID}"
             self.do_show(Input)
             return ""
 
         " Check if the line matches the pattern <class name>.destroy(<id>)"
-        X = re.search(r"^(\w*)\.destroy\(['\"]?([\w-]+)['\"]?\)$", arg)
-        if X:
+        D = re.search(r"^(\w*)\.destroy\(['\"]?([\w-]+)['\"]?\)$", arg)
+        if D:
             ID = args[1][8:-1]
             Input = f"{C_name} {ID}"
             self.do_destroy(Input)
