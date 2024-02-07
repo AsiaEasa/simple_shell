@@ -76,14 +76,11 @@ class HBNBCommand(cmd.Cmd):
             PR = args[1][7:-1]
             AR = PR.split(", ", 1)
             ID = AR[0]
-            print(AR)
             if len(AR) == 2:
                 SS = json.loads(AR[1])
-                print(SS)
-                for X in SS:
+                for K in SS:
                     V = SS[K]
                     Input = f"{C_name} {ID} {K} {V}"
-                    print(Input)
                     self.do_update(Input)
             elif len(AR) == 1:
                 print("** dictionary representation **")
