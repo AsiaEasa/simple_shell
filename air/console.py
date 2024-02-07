@@ -73,7 +73,22 @@ class HBNBCommand(cmd.Cmd):
             return ""
 
         if Y:
-            print("** class doesn't exist **")
+            PR = args[1][7:-1]
+            AR = PR.split(", {")
+            ID = AR[0]
+            if len(AR) == 2:
+                S = "{" + AR[1]
+                SS = json.loads(S)
+                for X in SS:
+                    V = SS[K]
+                    Input = f"{C_name} {ID} {K} {V}"
+                    print(Input)
+                    self.do_update(Input)
+            elif len(AR) == 1:
+                print("** dictionary representation **")
+            else:
+                print("** instance id missing **")
+            return ""
 
         return cmd.Cmd.precmd(self, arg)
 
