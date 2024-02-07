@@ -53,6 +53,28 @@ class HBNBCommand(cmd.Cmd):
             self.do_show(Input)
             return ""
 
+        " Check if the line matches the pattern <class name>.destroy(<id>)"
+        X = re.search(r"^(\w*)\.destroy\(['\"]?([\w-]+)['\"]?\)$", arg)
+        if X:
+            ID = args[1][8:-1]
+            Input = f"{C_name} {ID}"
+            self.do_destroy(Input)
+            return ""
+
+        " Check if the line matches the pattern of update in 15 and 16"
+        X = re.search(r"^(\w*)\.update\(['\"]?([\w-]+)['\"]?, ['\"]?([\w-]+)['\"]?, (.*?)\)$", arg)
+        Y = re.search(r"^(\w*)\.update\(['\"]?([\w-]+)['\"]?, (\{.*\})\)$", arg)
+
+        if X:
+            PR = args[1][7:-1]
+            AR = PR.split(", ")
+            Input = f"{C_name} {AR[0]} {AR[1]} {AR[2]}"
+            self.do_update(Input)
+            return ""
+
+        if Y:
+            print("** class doesn't exist **")
+
         return cmd.Cmd.precmd(self, arg)
 
     def do_all(self, arg):
