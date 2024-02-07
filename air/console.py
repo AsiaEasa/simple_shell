@@ -76,16 +76,11 @@ class HBNBCommand(cmd.Cmd):
             PR = args[1][7:-1]
             AR = PR.split(", ", 1)
             ID = AR[0]
-            if len(AR) == 2:
-                SS = json.loads(AR[1])
-                for K in SS:
-                    V = SS[K]
-                    Input = f"{C_name} {ID} {K} {V}"
-                    self.do_update(Input)
-            elif len(AR) == 1:
-                print("** dictionary representation **")
-            else:
-                print("** instance id missing **")
+            SS = json.loads(AR[1])
+            for K in SS:
+                V = SS[K]
+                Input = f"{C_name} {ID} {K} {V}"
+                self.do_update(Input)
             return ""
 
         return cmd.Cmd.precmd(self, arg)
