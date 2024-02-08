@@ -23,8 +23,8 @@ class HBNBCommand(cmd.Cmd):
     }
     KH_K = list(KH.keys())
 
-    def precmd(self, arg):
-        """the precmd method of the parent class.
+    def default(self, arg):
+        """the default method of the parent class.
         """
 
         " Make the app work non-interactively"
@@ -92,7 +92,8 @@ class HBNBCommand(cmd.Cmd):
                 self.do_update(Input)
             return ""
 
-        return cmd.Cmd.precmd(self, arg)
+        if not A and not B and not C and not D and not X and not Y:
+            print("*** Unknown syntax: {}".format(arg))
 
     def do_all(self, arg):
         """Prints string representation of all instances or to any class.
