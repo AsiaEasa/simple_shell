@@ -15,28 +15,6 @@ int binary_tree_is_leaf(const binary_tree_t *node)
 
 	return (0);
 }
-/**
- * binary_tree_depth - measures the depth
- * @tree: a pointer to the node
- * Return: the depth of a node
- */
-size_t binary_tree_depth(const binary_tree_t *tree)
-{
-	const binary_tree_t *P;
-	size_t D = 0;
-	P = tree;
-
-	if (!tree || !(P->parent))
-		return (0);
-
-	while (P->parent)
-	{
-		D++;
-		P = P->parent;
-	}
-
-	return (D);
-}
 
 /**
  * get_leaf - Returns a leaf of a binary tree.
@@ -71,6 +49,29 @@ int is_perfect(const binary_tree_t *tree,
 	per_L = is_perfect(tree->left, D, L + 1);
 	per_R = is_perfect(tree->right, D, L + 1);
 	return (per_L && per_R);
+}
+
+/**
+ * binary_tree_depth - measures the depth
+ * @tree: a pointer to the node
+ * Return: the depth of a node
+ */
+size_t binary_tree_depth(const binary_tree_t *tree)
+{
+	const binary_tree_t *P;
+	size_t D = 0;
+	P = tree;
+
+	if (!tree || !(P->parent))
+		return (0);
+
+	while (P->parent)
+	{
+		D++;
+		P = P->parent;
+	}
+
+	return (D);
 }
 
 /**
