@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#Sharing your SSH client configuration
+Host *
+      HostName 98.98.98.98
+      User ubuntu
+      IdentityFile ~/.ssh/school
+      PreferredAuthentications publickey
+      PasswordAuthentication no
