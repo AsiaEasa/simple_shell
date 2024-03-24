@@ -1,3 +1,0 @@
-#!/bin/bash
-# connect to your server using the private key
-ssh -i ~/.ssh/school ubuntu@172.17.0.3
